@@ -1,4 +1,5 @@
 <?php
+include './controllers/get_controller.php';
 
 function handle_get_routes($url)
 {
@@ -7,8 +8,8 @@ function handle_get_routes($url)
     case '/':
       echo "Hello from the main page!";
       break;
-    case '/about':
-      echo "Hello from the about page!";
+    case '/get-all':
+      GetController::get_all();
       break;
     case '/contact':
       echo "Hello from the contact page!";

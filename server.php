@@ -1,5 +1,5 @@
 <?php
-include "./controllers.php";
+include "./routes.php";
 
 $current_url = $_SERVER['REQUEST_URI'];
 $method_type = $_SERVER['REQUEST_METHOD'];
