@@ -1,15 +1,15 @@
 <?php
 include './controllers/get_controller.php';
 
-function handle_get_routes($url)
+function handle_get_routes($url, $query)
 {
   switch ($url)
   {
-    case '/':
-      echo "Hello from the main page!";
-      break;
-    case '/get-all':
+    case '/all':
       GetController::get_all();
+      break;
+    case '/person/?' . $query: //manually matching the query if present
+      GetController::get($query);
       break;
     case '/contact':
       echo "Hello from the contact page!";

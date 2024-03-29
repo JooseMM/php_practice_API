@@ -10,16 +10,12 @@ class GetController extends MyDatabase
     $response_to_json = json_encode($query_response);
     header('Content-Type: application/json');
     echo $response_to_json;
-    /*
-    foreach($query_response as $person)
-    {
-      echo $person['id'] . " " . $person['name'] . " " . $person['age'] . " " . "\n";
-    } 
-     */
   }
-  public static function get()
+  public static function get($query_string)
   {
-      //TODO: get by id function
+      //TODO: create a regex to recognize multiple values
+      //with their respective names
   }
 
+ 
 }
