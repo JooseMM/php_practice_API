@@ -24,7 +24,7 @@ class Request
   private function clean_data($name, $age)
   {
     return ["name" => $name, "age" => $age];
-    //TODO: clear incoming data
+    //TODO: sanitize incoming data
   }
 
 }

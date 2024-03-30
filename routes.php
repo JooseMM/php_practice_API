@@ -1,8 +1,9 @@
 <?php
 include './controllers/controllers.php';
 
-function handle_get_routes($url, $query)
+function handle_get_routes($url, $raw_query)
 {
+  $query = str_contains($raw_query, '=') ? $raw_query : NULL;
   switch ($url)
   {
     case '/all':
