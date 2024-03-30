@@ -8,6 +8,7 @@ class MyDatabase extends SQLite3
   private function init_connection()
   {
     $this->open('./database/example.db');
+ //   $this->open('example.db');
   }
 
   public static function get_all()
@@ -30,33 +31,39 @@ class MyDatabase extends SQLite3
     return $data_array;
   }
 
+  public static function get_person($id)
+  {
+    $self = new self();
+    $self->init_connection();
+    $statement = $self->prepare('SELECT * FROM example WHERE id = ? ');
+    $statement->bindValue(1, $id, SQLITE3_TEXT);
+    $query_outcome = $statement->execute();
+    $raw_result = $query_outcome->fetchArray();
+    $self->close();
+
+    return array_filter($raw_result, function($key) {
+      return $key == "id" || $key == "name" || $key == "age";
+    }, ARRAY_FILTER_USE_KEY);
+
+  }
   public static function add_person($name, $age)
   {
-    $instance = new self();
-    $instance->init_connection();
-    $new_person = $instance->clean_data($name, $age);
+    $self = new self();
+    $self->init_connection();
+    $new_person = $self->clean_data($name, $age);
     $new_id = uniqid();
 
     $sql_exec = <<<EOF
     INSERT INTO example VALUES("$new_id", "{$new_person['name']}", {$new_person['age']});
     EOF;
 
-    $outcome = $instance->exec($sql_exec);
-    $instance->close();
+    $outcome = $self->exec($sql_exec);
+    $self->close();
     return $outcome;
   }
 
-  private function clean_data($name, $age)
-  {
-    return ["name" => $name, "age" => $age];
-    //TODO: clear incoming data
-  }
 
 }
-
 //Testing!
-/*
-MyDatabase::add_person('Jose Moreno', 25);
-var_dump(MyDatabase::get_all());
-*/
+//6605a317dbe3a
 

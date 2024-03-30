@@ -1,5 +1,5 @@
 <?php
-include './controllers/get_controller.php';
+include './controllers/controllers.php';
 
 function handle_get_routes($url, $query)
 {
