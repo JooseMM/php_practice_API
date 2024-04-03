@@ -3,9 +3,9 @@ include "./routes.php";
 
 $current_url = $_SERVER['REQUEST_URI'];
 $method_type = $_SERVER['REQUEST_METHOD'];
-$url_query = $_SERVER['QUERY_STRING']; 
+$url_query = array_key_exists('QUERY_STRING', $_SERVER) ? $_SERVER['QUERY_STRING'] : ''; 
 
-switch($method_type)
+switch($method_type) 
 {
     case 'GET':
       handle_get_routes($current_url, $url_query);

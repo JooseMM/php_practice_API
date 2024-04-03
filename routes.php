@@ -3,7 +3,8 @@ include './controllers/controllers.php';
 
 function handle_get_routes($url, $raw_query)
 {
-  $query = str_contains($raw_query, '=') ? $raw_query : NULL;
+  $query = Request::validate_query($raw_query);
+
   switch ($url)
   {
     case '/all':

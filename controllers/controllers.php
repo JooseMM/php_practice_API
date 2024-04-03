@@ -10,14 +10,14 @@ class GetController
     $response = MyDatabase::get_all();
     Response::send_json($response);
   }
-  public static function get($raw_query_string)
+  public static function get($query_string)
   {
-    if(!$raw_query_string) 
+    if(!DataValidation::not_empty_string($query_string)) 
     { 
-      Response::send_json(["response"=> "bad query"]); 
+      return Response::send_json(["response"=> "bad query"]); 
     }
 
-      $translated_query = Request::translate_query($raw_query_string);
+      $translated_query = Request::translate_query($query_string);
       $query_response = MyDatabase::get_person($translated_query['id']);
       Response::send_json($query_response);
   }
