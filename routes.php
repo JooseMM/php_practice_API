@@ -7,20 +7,25 @@ function handle_get_routes($url, $raw_query)
 
   switch ($url)
   {
-    case '/all':
+    case "/all":
       GetController::get_all();
       break;
-    case '/person/?' . $query: //manually matching the query if present
+    case "/person/?" . $query: //manually matching the query if present
       GetController::get($query);
       break;
-    case '/contact':
+    case "/contact":
       echo "Hello from the contact page!";
       break;
   }
 }
-function handle_post_routes($url)
+function handle_post_routes($url, $raw_data) 
 {
-  //TODO: switch for post request
+  switch($url)
+  {
+    case "/add":
+      PostController::add($raw_data);
+      break;
+  }
 }
 function handle_put_routes($url)
 {

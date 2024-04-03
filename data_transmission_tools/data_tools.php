@@ -30,10 +30,15 @@ class Request
     return NULL;
   }
 
-  private function clean_data($name, $age)
+  public static function is_valid_input($raw_data)
   {
-    return ["name" => $name, "age" => $age];
-    //TODO: sanitize incoming data
+    $only_letters = '/^[a-zA-Z]+$/'; // Pattern to match only letters
+    $only_age = '/^(?:0|1[0-4]?[0-9]|150)$/'; // Pattern to match numbers from 0 to 150
+
+    if(!preg_match($only_letters, $raw_data['name']) || !preg_match($only_age, $raw_data['age'])) {
+      return false;
+    } 
+    return true;
   }
 
 
@@ -41,11 +46,12 @@ class Request
 class Response 
 {
 
-  public static function send_json($data)
-  {
-      $response_to_json = json_encode($data);
-      header('Content-Type: application/json');
-      echo $response_to_json;
+  public static function send_json($successful, $data, $message)
+  { 
+    $raw_response = [ "successful" => $successful, "data" => $data, "error"=> $successful ? false : true, "message"=> $message ];
+    $parse_response = json_encode($raw_response);
+    header('Content-Type: application/json');
+    echo $parse_response;
   }
 
 }

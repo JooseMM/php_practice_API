@@ -46,22 +46,20 @@ class MyDatabase extends SQLite3
     }, ARRAY_FILTER_USE_KEY);
 
   }
-  public static function add_person($name, $age)
+  public static function add_person($data)
   {
     $self = new self();
     $self->init_connection();
-    $new_person = $self->clean_data($name, $age);
     $new_id = uniqid();
 
     $sql_exec = <<<EOF
-    INSERT INTO example VALUES("$new_id", "{$new_person['name']}", {$new_person['age']});
+    INSERT INTO example VALUES("$new_id", "{$data['name']}", {$data['age']});
     EOF;
 
     $outcome = $self->exec($sql_exec);
     $self->close();
     return $outcome;
   }
-
 
 }
 //Testing!
