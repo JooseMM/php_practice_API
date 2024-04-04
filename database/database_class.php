@@ -59,28 +59,14 @@ class MyDatabase extends SQLite3
   }
   public static function remove_one($target_id)
   {
-    /*
     $self = new self();
     $self->init_connection();
-    $statement = <<<EOF
-    DELETE FROM example WHERE id = "$target_id"; 
-    EOF;
-    $result = $self->query($statement);
-    $self->close();
-    return $result;
-     */
-    $sql = "DELETE FROM example "
-      . "WHERE id = :target_id";
-
-    $self = new self();
-    $stmt = $self->PDO->prepare($sql);
-    $stmt->bindValue(":target_id", $target_id);
-    $stmt->execute();
-
-    return $stmt->rowCount();
+    $statement = $self->prepare("DELETE FROM example WHERE id = :person_id");
+    $statement->bindValue(':person_id', $target_id, SQLITE3_TEXT);
+    $sql_result = $statement->execute();
+    return $sql_result->numColumns();
+    
   }
-
 }
-//Testing!
-//6605a317dbe3a
+
 

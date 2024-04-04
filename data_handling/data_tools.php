@@ -60,10 +60,10 @@ class DataValidation
 
   public static function is_valid_input($raw_data)
   {
-    $only_letters = '/^[a-zA-Z]+$/'; // Pattern to match only letters
-    $only_age = '/^(?:0|1[0-4]?[0-9]|150)$/'; // Pattern to match numbers from 0 to 150
+    $only_letters = "/^[a-zA-Z]+$/"; // Pattern to match only letters
+    $only_age = "/^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$/"; // Pattern to match numbers from 0 to 150
 
-    if(!preg_match($only_letters, $raw_data['name']) || !preg_match($only_age, $raw_data['age'])) {
+    if(!preg_match($only_letters, $raw_data["name"]) || !preg_match($only_age, $raw_data["age"])) {
       return false;
     } 
     return true;

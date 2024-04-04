@@ -42,10 +42,13 @@ class PostController
   }
   public static function remove($raw_input) 
   {
+    var_dump($raw_input); 
     if(!DataValidation::is_valid_id($raw_input["id"])) { return Response::send_json(false, NULL, "Invalid id provided"); }
     $database_response = MyDatabase::remove_one($raw_input["id"]);
+    /*
     if(!$database_response) { return Response::send_json(true, NULL, "No match found"); }
     return Response::send_json(true, $database_response, "Data remove successfuly");
-      
+     */
+    var_dump($database_response); 
   }
 }
