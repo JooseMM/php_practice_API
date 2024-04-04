@@ -1,22 +1,22 @@
 <?php include "./routes.php";
 
-$current_url = $_SERVER['REQUEST_URI'];
-$method_type = $_SERVER['REQUEST_METHOD'];
-$url_query = array_key_exists('QUERY_STRING', $_SERVER) ? $_SERVER['QUERY_STRING'] : ''; 
+$current_url = $_SERVER["REQUEST_URI"];
+$method_type = $_SERVER["REQUEST_METHOD"];
+$query_string = array_key_exists("QUERY_STRING", $_SERVER) ? $_SERVER["QUERY_STRING"] : NULL; 
 
 switch($method_type) 
 {
-    case 'GET':
-      handle_get_routes($current_url, $url_query);
+    case "GET":
+      handle_get_routes($current_url, $query_string);
       break;
-    case 'POST':
-      $form_data = [ 'name'=>$_POST["name"], 'age'=> $_POST["age"] ];
+    case "POST":
+      $form_data = [ "name" => $_POST["name"], "age"=> $_POST["age"] ];
       handle_post_routes($current_url, $form_data);
       break;
-    case 'PUT':
+    case "PUT":
       handle_put_routes($current_url);
       break;
-    case 'DELETE':
+    case "DELETE":
       handle_delete_routes($current_url);
       break;
 }

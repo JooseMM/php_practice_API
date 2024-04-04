@@ -38,13 +38,10 @@ class MyDatabase extends SQLite3
     $statement = $self->prepare('SELECT * FROM example WHERE id = ? ');
     $statement->bindValue(1, $id, SQLITE3_TEXT);
     $query_outcome = $statement->execute();
-    $raw_result = $query_outcome->fetchArray();
+    $raw_result = $query_outcome->fetchArray(SQLITE3_ASSOC);
     $self->close();
-
-    return array_filter($raw_result, function($key) {
-      return $key == "id" || $key == "name" || $key == "age";
-    }, ARRAY_FILTER_USE_KEY);
-
+    return $raw_result;
+   
   }
   public static function add_person($data)
   {
