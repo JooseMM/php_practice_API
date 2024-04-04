@@ -24,13 +24,12 @@ function handle_post_routes($url, $raw_data)
     case "/add":
       PostController::add($raw_data);
       break;
+    case "/remove":
+      PostController::remove($raw_data);
+      break;
   }
 }
 function handle_put_routes($url)
 {
   //TODO: switch for put request
-}
-function handle_delete_routes($url)
-{
-  //TODO: switch for delete request
 }

@@ -10,7 +10,7 @@ switch($method_type)
       handle_get_routes($current_url, $query_string);
       break;
     case "POST":
-      $form_data = [ "name" => $_POST["name"], "age"=> $_POST["age"] ];
+      $form_data = [ "name" => $_POST["name"], "age"=> $_POST["age"], "id" => $_POST["id"] ];
       handle_post_routes($current_url, $form_data);
       break;
     case "PUT":

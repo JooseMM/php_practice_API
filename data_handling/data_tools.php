@@ -68,4 +68,14 @@ class DataValidation
     } 
     return true;
   }
+  public static function is_valid_id($raw_data)
+  {
+    $only_letters_numbers = "/^[a-zA-Z0-9]+$/";
+    if(!preg_match($only_letters_numbers, $raw_data))
+    {
+      return false;
+    }
+    return true;
+  }
+
 }

@@ -7,7 +7,7 @@ class MyDatabase extends SQLite3
 
   private function init_connection()
   {
-    $this->open('./database/example.db');
+    $this->open("./database/example.db");
  //   $this->open('example.db');
   }
 
@@ -31,11 +31,11 @@ class MyDatabase extends SQLite3
     return $data_array;
   }
 
-  public static function get_person($id)
+  public static function get($id)
   {
     $self = new self();
     $self->init_connection();
-    $statement = $self->prepare('SELECT * FROM example WHERE id = ? ');
+    $statement = $self->prepare("SELECT * FROM example WHERE id = ? ");
     $statement->bindValue(1, $id, SQLITE3_TEXT);
     $query_outcome = $statement->execute();
     $raw_result = $query_outcome->fetchArray(SQLITE3_ASSOC);
@@ -43,19 +43,41 @@ class MyDatabase extends SQLite3
     return $raw_result;
    
   }
-  public static function add_person($data)
+  public static function add_one($data)
   {
     $self = new self();
     $self->init_connection();
     $new_id = uniqid();
 
     $sql_exec = <<<EOF
-    INSERT INTO example VALUES("$new_id", "{$data['name']}", {$data['age']});
+    INSERT INTO example VALUES("$new_id", "{$data["name"]}", {$data["age"]});
     EOF;
 
     $outcome = $self->exec($sql_exec);
     $self->close();
     return $outcome;
+  }
+  public static function remove_one($target_id)
+  {
+    /*
+    $self = new self();
+    $self->init_connection();
+    $statement = <<<EOF
+    DELETE FROM example WHERE id = "$target_id"; 
+    EOF;
+    $result = $self->query($statement);
+    $self->close();
+    return $result;
+     */
+    $sql = "DELETE FROM example "
+      . "WHERE id = :target_id";
+
+    $self = new self();
+    $stmt = $self->PDO->prepare($sql);
+    $stmt->bindValue(":target_id", $target_id);
+    $stmt->execute();
+
+    return $stmt->rowCount();
   }
 
 }
