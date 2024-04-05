@@ -74,7 +74,7 @@ class MyDatabase
     catch(PDOException $e) { return [ "successful" => false, "query_result" => NULL, "message" => "Connection failed: " . $e->getMessage() ]; }
   }
 
-  public static function edit_one($target_id, $updated_value)
+  public static function update_one($target_id, $updated_value)
   {
     
     $params_array = get_specific_params($updated_value);

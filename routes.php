@@ -31,5 +31,11 @@ function handle_post_routes($url, $raw_data)
 }
 function handle_put_routes($url)
 {
-  //TODO: switch for put request
+  switch($url)
+  {
+    case "/update":
+      UpdateController::update_one($raw_data);
+      break;
+  }
+
 }

@@ -14,10 +14,8 @@ switch($method_type)
       handle_post_routes($current_url, $form_data);
       break;
     case "PUT":
-      handle_put_routes($current_url);
-      break;
-    case "DELETE":
-      handle_delete_routes($current_url);
+      $form_data = [ "name" => $_POST["name"], "age"=> $_POST["age"], "id" => $_POST["id"] ];
+      handle_put_routes($current_url, $form_data);
       break;
 }
 
