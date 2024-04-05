@@ -8,7 +8,7 @@ class GetController
   public static function get_all()
   {
     $response = MyDatabase::get_all();
-    Response::send_json(true, $response, NULL);
+    Response::send_json($response["successful"], $response["query_result"], $response["message"]);
   }
 
   public static function get($raw_query)
@@ -16,10 +16,9 @@ class GetController
       $valid_query = Request::parse_query($raw_query);
       if(!$valid_query) { return Response::send_json(false, NULL, "Bad string query"); }
       if(!array_key_exists("id", $valid_query)) {  return Response::send_json(false, NULL, "Invalid id provided");   } 
-      $database_response = MyDatabase::get($valid_query['id']);
-      if(!$database_response) { return Response::send_json(true, NULL, "No match found"); } return Response::send_json(true, $database_response, "Data requested successfully");
+      $response = MyDatabase::get_one($valid_query['id']);
+      return Response::send_json($response["successful"], $response["query_result"], $response["message"]); 
   }
-
 }
 
 class PostController 
@@ -40,15 +39,10 @@ class PostController
 	return Response::send_json(true, NULL, "Data added successfully");
 
   }
-  public static function remove($raw_input) 
+  public static function remove($array_input) 
   {
-    var_dump($raw_input); 
-    if(!DataValidation::is_valid_id($raw_input["id"])) { return Response::send_json(false, NULL, "Invalid id provided"); }
-    $database_response = MyDatabase::remove_one($raw_input["id"]);
-    /*
-    if(!$database_response) { return Response::send_json(true, NULL, "No match found"); }
-    return Response::send_json(true, $database_response, "Data remove successfuly");
-     */
-    var_dump($database_response); 
+    if(!DataValidation::is_valid_id($array_input["id"])) { return Response::send_json(false, NULL, "Invalid id provided"); }
+    $response = MyDatabase::remove_one($array_input["id"]);
+    return Response::send_json($response["successful"], $response["query_result"], $response["message"]);
   }
 }
