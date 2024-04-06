@@ -74,25 +74,30 @@ class MyDatabase
     catch(PDOException $e) { return [ "successful" => false, "query_result" => NULL, "message" => "Connection failed: " . $e->getMessage() ]; }
   }
 
-  public static function update_one($target_id, $updated_value)
-  {
-    
-    $params_array = get_specific_params($updated_value);
-    if(!$params_array) { return NULL; }
-
-    try 
-    {
-      $pdo = new PDO("sqlite:" . self::$db_path);
-      [ $key_column, $value_type ] = $params_array;
-
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $statement = $pdo->prepare("UPDATE example SET $key_column = :new_value WHERE person_id = :id");
-      $statement->bindValue(":new_value", $updated_value[$key_column], $value_type);
-      $statement->bindValue(":id", $target_id, PDO::PARAM_STR);
-      $pdo = NULL;
-      return $statement->execute();
-    }
-    catch(PDOException $e) { return "Connection failed: " . $e->getMessage(); }
+  public static function update_one($newp) {
+    try {
+	$pdo = new PDO("sqlite:" . self::$db_path);
+     	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //setting attributes to throw exeptions
+     	$stm = $pdo->prepare(
+     	        "UPDATE example SET name = :new_name, age = :new_age WHERE person_id = :id"
+     	);
+     	$stm->bindValue(":new_name", $newp["name"], PDO::PARAM_STR);
+     	$stm->bindValue(":new_age", $newp["age"], PDO::PARAM_INT);
+     	$stm->bindValue(":id", $newp["id"], PDO::PARAM_STR);
+     	$pdo = NULL;
+     	$stm->execute();
+     	return [
+		"successful" => true, 
+		"query_result" => NULL,
+		"message" => "Data updated successfully"
+       	];
+	} catch(PDOException $e) { 
+		return [ 
+		"successful" => false,
+		"query_result" => NULL,
+		"message" => "Connection failed: " . $e->getMessage()
+	       	]; 
+	}
   }
 
 }

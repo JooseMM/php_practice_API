@@ -40,15 +40,23 @@ class PostController
 }
 class updatecontroller
 {
-  public static function update_one($raw_data)
-  {
-      $target_id = $raw_data["id"];
-      $filter_array = array_filter($raw_data, function($value, $key) { return $key !== 'id' && $value !== NULL; }, ARRAY_FILTER_USE_BOTH));
-      if(!DataValidation::is_valid_id($target_id) { Response::send_json(false, NULL, "Invalid ID provided"); }
-      if(!DataValidation::is_valid_name($filter_array)) { Response::send_json(false, NULL, "Invalid data provided"); }
-      if(!DataValidation::is_valid_age($filter_array)) { Response::send_json(false, NULL, "Invalid data provided"); }
-      $result = MyDatabase::update_one($target_id, $filter_array);
-      //try making this not depend to be only one value to edit
+  public static function update_one($raw_data) {
+	foreach($raw_data as $val) {
+		if($val == NULL || $val === " " || $val === "\n" || $val === "\t")
+			return Response::send_json(false, NULL, "Incomplete data provided"); 
+	}
+
+	if(!DataValidation::is_valid_id($raw_data["id"]))
+		return Response::send_json(false, NULL, "Invalid ID provided");
+
+	if(!DataValidation::is_valid_name($raw_data["name"])) 
+		return Response::send_json(false, NULL, "Invalid name provided");
+
+	if(!DataValidation::is_valid_age($raw_data["age"])) 
+		return Response::send_json(false, NULL, "Invalid age provided");
+
+	$result = MyDatabase::update_one($raw_data);
+	return ;
 
   }
 

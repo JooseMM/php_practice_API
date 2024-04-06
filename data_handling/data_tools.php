@@ -41,8 +41,7 @@ class Request
 
 }
 
-class Response 
-{
+class Response {
 
   public static function send_json($successful, $data, $message)
   { 
@@ -54,35 +53,34 @@ class Response
 
 }
 
-class DataValidation 
-{
+class DataValidation {
 
-  public static function validate_string_query($raw_string_query)
-  {
+  public static function validate_string_query($raw_string_query) {
     $only_string_queries = "/^[a-zA-Z]+=[a-zA-Z0-9]+$/";
-
-    if(!preg_match($only_string_queries, $raw_string_query)) { return false; }
-    return true;
+	if(!preg_match($only_string_queries, $raw_string_query)) 
+		return false; 
+	else 
+    		return true;
   }
 
-  public static function is_valid_name($raw_data) 
+  public static function is_valid_name($val) 
   {
     $only_letters = "/^[a-zA-Z]+$/"; // Pattern to match only letters
-    if(!preg_match($only_letters, $raw_data["name"])) { return false; } 
+    if(!preg_match($only_letters, $val)) { return false; } 
     return true;
 
   }
-  public static function is_valid_age($raw_data) 
+  public static function is_valid_age($val) 
   {
     $only_age = "/^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$/"; // Pattern to match numbers from 0 to 150
-    if(!preg_match($only_age, $raw_data["age"])) { return false; } 
+    if(!preg_match($only_age, $val)) { return false; } 
     return true;
 
   }
-  public static function is_valid_id($raw_data)
+  public static function is_valid_id($val)
   {
     $only_letters_numbers = "/^[a-zA-Z0-9]+$/";
-    if(!preg_match($only_letters_numbers, $raw_data)) { return false; }
+    if(!preg_match($only_letters_numbers, $val)) { return false; }
     return true;
   }
 

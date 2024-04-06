@@ -17,25 +17,18 @@ function handle_get_routes($url, $raw_query)
       break;
   }
 }
-function handle_post_routes($url, $raw_data) 
+function handle_post_routes($url, $nwp) 
 {
   switch($url)
   {
     case "/add":
-      PostController::add($raw_data);
+      PostController::add($nwp);
       break;
     case "/remove":
-      PostController::remove($raw_data);
+      PostController::remove($nwp);
       break;
-  }
-}
-function handle_put_routes($url)
-{
-  switch($url)
-  {
     case "/update":
-      UpdateController::update_one($raw_data);
+      UpdateController::update_one($nwp);
       break;
   }
-
 }
