@@ -79,7 +79,7 @@ class MyDatabase
 	$pdo = new PDO("sqlite:" . self::$db_path);
      	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //setting attributes to throw exeptions
      	$stm = $pdo->prepare(
-     	        "UPDATE example SET name = :new_name, age = :new_age WHERE person_id = :id"
+     	        "UPDATE example SET name = :new_name, age = :new_age WHERE id = :id"
      	);
      	$stm->bindValue(":new_name", $newp["name"], PDO::PARAM_STR);
      	$stm->bindValue(":new_age", $newp["age"], PDO::PARAM_INT);
