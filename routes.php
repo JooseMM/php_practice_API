@@ -14,7 +14,7 @@ function handle_get_routes($url, $raw_query) {
       		echo "Hello from the contact page!";
       		break;
 	default:
-		Response::send_json(false, NULL, "Invalid path");
+		Response::send_json(false, NULL, "Invalid path", 404);
 		break;
   	}
 }
@@ -30,7 +30,7 @@ function handle_post_routes($url, $nwp) {
       		PostController::update_one($nwp);
       		break;
 	default:
-		Response::send_json(false, NULL, "Invalid path");
+		Response::send_json(false, NULL, "Invalid path", 404);
 		break;
   }
 }

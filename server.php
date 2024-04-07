@@ -14,7 +14,7 @@ case "POST":
 	break;
 
 default:
-	Response::send_json(false, NULL, "Invalid request method");
+	Response::send_json(false, NULL, "Unsupported method", 405);
 	break;
 }
 

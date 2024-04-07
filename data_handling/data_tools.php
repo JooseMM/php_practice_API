@@ -31,11 +31,12 @@ class Request {
 
 class Response {
 
-	public static function send_json($successful, $data, $message) { 
+	public static function send_json($successful, $data, $message, $status) { 
 		$raw_response = [
 		       	"successful" => $successful,
 			"data" => $data,
-			"error"=> $successful ? false : true, "message"=> $message 
+			"error"=> $successful ? false : true, "message"=> $message,
+			"status"=> $status
 		];
 		$parse_response = json_encode($raw_response);
 		header('Content-Type: application/json');
