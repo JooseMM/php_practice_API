@@ -7,6 +7,9 @@ function handle_get_routes($url, $raw_query) {
 	case "/all":
       		GetController::get_all();
       		break;
+	case "/":
+		GetController::index();
+		break;
     	case "/get/?" . $raw_query: //manually matching the query if present
       		GetController::get($raw_query);
       		break;

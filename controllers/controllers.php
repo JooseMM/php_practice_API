@@ -4,6 +4,24 @@ include './data_handling/data_tools.php';
 
 class GetController {
 
+	public static function index() {
+		$msg = "Hello! I'm Jose Moreno and this is RESTful API written only using native PHP, 
+			this was done for educational purposes only and thus is not production ready. 
+			The motivation behind this was to solidfy my knowlege in this language 
+			also to create an API for future testing and mocking data for front-end apps.
+
+			The documentation for this app is in my repo:
+			https://github.com/JooseMM/php_practice_API			
+
+			If you want to see more of me you can go to my portfolio using this links
+			https://jamm-portfolio.netlify.app/ 
+
+			GLHF
+
+			-Jose
+			";
+		Response::send_json(true, NULl, $msg, 200);
+	}
 	public static function get_all() {
 		$res = MyDatabase::get_all();
 		Response::send_json($res["successful"], $res["queryResult"], $res["message"], $res["status"]);
