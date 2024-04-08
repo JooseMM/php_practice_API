@@ -41,4 +41,37 @@ This endpoint deletes the row matching the provided ID from the database.
 - Porfolio: https://jamm-portfolio.netlify.app/
 - LinkedIn: www.linkedin.com/in/jamm-dev
 
- 
+- https://ubuntu.com/server/docs/programming-php
+
+ ## Run
+
+### To run this API all yo have to do is:
+
+**Installing dependencies(Linux/Ubuntu)**
+```bash
+sudo apt install php-sqlite3 sqlite3 php libapache2-mod-php php-cli
+```
+
+### Futher information about installing PHP in ubuntu go to:
+- https://ubuntu.com/server/docs/programming-php
+
+**Cloning this repo**
+```bash
+git clone https://github.com/JooseMM/php_practice_api.git
+```
+**Go to the clone folder**
+```bash
+cd php_practice_api
+```
+
+**Run**
+```bash
+php -S localhost:8000 index.php
+```
+
+**Now you should be able to test and use this API doing:**
+
+```bash
+curl http://localhost:8000/all
+```
+
