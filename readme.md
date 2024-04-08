@@ -45,17 +45,17 @@ This endpoint deletes the row matching the provided ID from the database.
 
  ## Run
 
-### To run this API all yo have to do is:
+### To run this API all you have to do is:
 
-**Installing dependencies(Linux/Ubuntu)**
+**Install dependencies(Linux/Ubuntu)**
 ```bash
 sudo apt install php-sqlite3 sqlite3 php libapache2-mod-php php-cli
 ```
 
 ### Futher information about installing PHP in ubuntu go to:
-- https://ubuntu.com/server/docs/programming-php
+https://ubuntu.com/server/docs/programming-php
 
-**Cloning this repo**
+**Clone this repository**
 ```bash
 git clone https://github.com/JooseMM/php_practice_api.git
 ```
