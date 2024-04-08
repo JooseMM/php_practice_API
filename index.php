@@ -4,7 +4,7 @@ $current_url = $_SERVER["REQUEST_URI"];
 $method_type = $_SERVER["REQUEST_METHOD"];
 $query_string = array_key_exists("QUERY_STRING", $_SERVER) ? $_SERVER["QUERY_STRING"] : NULL; 
 
-error_reporting(0);
+//error_reporting(0); --> uncomment this to avoid php reporting errors
 switch ($method_type) {
 case "GET":
 	handle_get_routes($current_url, $query_string);
